@@ -1,0 +1,2 @@
+# MedicanScanAi_Apigateway_Service
+MedicanScanAi_Apigateway_Service
