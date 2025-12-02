@@ -22,6 +22,32 @@ public class GatewayController {
         this.restClient = restClientBuilder.build();
     }
 
+    // Specific endpoints for login and register
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Object body) {
+        String targetUrl = iamServiceUrl + "/api/v1/iam/login";
+        
+        return restClient.post()
+                .uri(targetUrl)
+                .header(HttpHeaders.CONTENT_TYPE, "application/json")
+                .body(body)
+                .retrieve()
+                .toEntity(Object.class);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody Object body) {
+        String targetUrl = iamServiceUrl + "/api/v1/iam/register";
+        
+        return restClient.post()
+                .uri(targetUrl)
+                .header(HttpHeaders.CONTENT_TYPE, "application/json")
+                .body(body)
+                .retrieve()
+                .toEntity(Object.class);
+    }
+
+    // Generic forwarding for IAM service
     @PostMapping("/iam/**")
     public ResponseEntity<?> forwardToIam(@RequestBody(required = false) Object body,
                                            HttpServletRequest request) {
